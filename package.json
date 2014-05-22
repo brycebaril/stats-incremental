@@ -1,0 +1,49 @@
+{
+  "name": "stats-incremental",
+  "version": "0.0.0",
+  "description": "A simple tool for calculating incremental stats on numeric streams.",
+  "main": "stats.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/"
+  },
+  "keywords": [
+    "stats",
+    "statistics",
+    "numbers",
+    "math",
+    "sum",
+    "mean",
+    "average",
+    "variance",
+    "deviation"
+  ],
+  "author": "Bryce B. Baril",
+  "license": "MIT",
+  "jshintConfig": {
+    "asi": true,
+    "globalstrict": true,
+    "validthis": true,
+    "eqnull": true,
+    "node": true,
+    "loopfunc": true,
+    "newcap": false,
+    "eqeqeq": false
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "stats-lite": "^1.0.3",
+    "tape": "~2.10.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brycebaril/stats-incremental.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brycebaril/stats-incremental/issues"
+  },
+  "homepage": "https://github.com/brycebaril/stats-incremental"
+}
