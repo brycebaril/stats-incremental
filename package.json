@@ -1,6 +1,6 @@
 {
   "name": "stats-incremental",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A simple tool for calculating incremental stats on numeric streams.",
   "main": "stats.js",
   "directories": {
