@@ -6,7 +6,7 @@ function Stats() {
   if (!(this instanceof Stats)) return new Stats()
   this.n = 0
   this.min = Number.MAX_VALUE
-  this.max = Number.MIN_VALUE
+  this.max = -Number.MAX_VALUE
   this.sum = 0
   this.mean = 0
   Object.defineProperty(this, "q", {
@@ -31,14 +31,8 @@ Stats.prototype.update = function update(value) {
     return
   }
   this.n++
-  if (this.n == 1) {
-    this.min = num
-    this.max = num
-  }
-  else {
-    this.min = Math.min(this.min, num)
-    this.max = Math.max(this.max, num)
-  }
+  this.min = Math.min(this.min, num)
+  this.max = Math.max(this.max, num)
   this.sum += num
   var prevMean = this.mean
   this.mean = this.mean + (num - this.mean) / this.n

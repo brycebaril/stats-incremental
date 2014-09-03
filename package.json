@@ -36,7 +36,7 @@
   "dependencies": {},
   "devDependencies": {
     "stats-lite": "^1.0.3",
-    "tape": "~2.10.2"
+    "tape": "~2.14.0"
   },
   "repository": {
     "type": "git",
