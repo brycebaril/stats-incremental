@@ -82,3 +82,13 @@ test("simple", function (t) {
 
   t.end()
 })
+
+test("zero", function (t) {
+  var s = Stats()
+  s.update(0)
+  t.equals(s.n, 1)
+  t.equals(s.min, 0)
+  t.equals(s.max, 0)
+  t.equals(s.sum, 0)
+  t.end()
+})

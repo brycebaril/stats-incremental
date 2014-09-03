@@ -31,8 +31,14 @@ Stats.prototype.update = function update(value) {
     return
   }
   this.n++
-  this.min = Math.min(this.min, num)
-  this.max = Math.max(this.max, num)
+  if (this.n == 1) {
+    this.min = num
+    this.max = num
+  }
+  else {
+    this.min = Math.min(this.min, num)
+    this.max = Math.max(this.max, num)
+  }
   this.sum += num
   var prevMean = this.mean
   this.mean = this.mean + (num - this.mean) / this.n
