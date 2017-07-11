@@ -13,6 +13,7 @@ E.g. given a source of numbers of unknown length that you would like to at any g
   * sum
   * variance
   * standard_deviation
+  * simple moving average
 
 This module can be used either with Node `streams` via a wrapper such as `through2` or without being streaming.
 
@@ -40,7 +41,8 @@ for (var i = 0; i < 100; i++) {
   sum: 673,
   mean: 6.938144329896907,
   variance: 5.851843979168881,
-  standard_deviation: 2.419058490233107 }
+  standard_deviation: 2.419058490233107,
+  sma50: 6.82 }
 */
 
 
@@ -79,14 +81,16 @@ spigot.sync({objectMode: true}, Math.random)
     sum: 49861.06196602131,
     mean: 0.49861061966021336,
     variance: 0.08331362954827709,
-    standard_deviation: 0.28864100462040576 }
+    standard_deviation: 0.28864100462040576,
+    sma50: 0.5422519558777934 }
   { n: 200000,
     min: 2.0884908735752106e-7,
     max: 0.9999937505926937,
     sum: 99904.73041411326,
     mean: 0.49952365207056687,
     variance: 0.08316120223669865,
-    standard_deviation: 0.2883768406732736 }
+    standard_deviation: 0.2883768406732736,
+    sma50: 0.4396136475716979 }
 */
 
 ```
@@ -94,18 +98,16 @@ spigot.sync({objectMode: true}, Math.random)
 API
 ===
 
-`var stats = require("stats-incremental")()`
----
+## `const Stats = require("stats-incremental")`
+## `var stats = new Stats(smaBins)`
 
-Create a new incremental stats aggregator.
+Create a new incremental stats aggregator. The `smaBins` argument is optional (default 50) and will choose the size of recent window to retain to calculate the Simple Moving Average on the recent data.
 
-`stats.update(value)`
----
+## `stats.update(value)`
 
 Update the aggregator with a value. Converted to a Number via parseFloat. If this results in NaN the update is skipped.
 
-`stats.getAll()`
----
+## `stats.getAll()`
 
 Get a up-to-date clone of all of the stats stored.
 
@@ -118,43 +120,41 @@ E.g.
   sum: 673,
   mean: 6.938144329896907,
   variance: 5.851843979168881,
-  standard_deviation: 2.419058490233107 }
+  standard_deviation: 2.419058490233107,
+  sma50: 6.82 }
 ```
 
-`stats.n`
----
+## `stats.n`
 
 The count of observations.
 
-`stats.min`
----
+## `stats.min`
 
 The min value observed.
 
-`stats.max`
----
+## `stats.max`
 
 The max value observed.
 
-`stats.sum`
----
+## `stats.sum`
 
 The sum of all values observed.
 
-`stats.mean`
----
+## `stats.mean`
 
 The arithmetic mean of the observations.
 
-`stats.variance`
----
+## `stats.variance`
 
 The variance from the mean.
 
-`stats.standard_deviation`
----
+## `stats.standard_deviation`
 
 The standard deviation of the values from the mean.
+
+## `stats.smaXX`
+
+Get the Simple Moving Average of the recent data. Default is to store 50 recent records and expose an `sma50` property with the simple moving average. If the `Stats` object is created with an argument of a number of SMA bins, the property will reflect the number of bins, e.g. `Stats(100)` will have an `sma100` instead of `sma50` property.
 
 Alternatives
 ---

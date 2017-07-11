@@ -23,6 +23,7 @@ test('simple', function (t) {
   t.equals(s.sum, 1, 'sum')
   t.equals(s.variance, 0, 'variance')
   t.equals(s.standard_deviation, 0, 'standard_deviation')
+  t.equals(s.sma50, 1, 'sma50')
 
   s.update(23.9)
   t.equals(s.n, 2, 'count correct')
@@ -32,6 +33,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.equals(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, 12.45, 'sma50')
 
   s.update(-30)
   t.equals(s.n, 3, 'count correct')
@@ -41,6 +43,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.equals(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, -1.7000000000000004, 'sma50')
 
   s.update('33.2')
   t.equals(s.n, 4, 'count correct')
@@ -50,6 +53,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.equals(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, 7.025, 'sma50')
 
   s.update(150)
   t.equals(s.n, 5, 'count correct')
@@ -59,6 +63,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.equals(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, 35.62, 'sma50')
 
   s.update(-150)
   t.equals(s.n, 6, 'count correct')
@@ -68,6 +73,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.goodEnuf(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, 4.683333333333333, 'sma50')
 
   s.update('cat')
   t.equals(s.n, 6, 'skipped NaN "cat"')
@@ -77,6 +83,7 @@ test('simple', function (t) {
   t.equals(s.sum, sl.sum(input.slice(0, s.n)), 'sum')
   t.goodEnuf(s.variance, sl.variance(input.slice(0, s.n)), 'variance')
   t.equals(s.standard_deviation, sl.stdev(input.slice(0, s.n)), 'standard_deviation')
+  t.equals(s.sma50, 4.683333333333333, 'sma50')
 
   t.end()
 })
@@ -88,5 +95,25 @@ test('zero', function (t) {
   t.equals(s.min, 0)
   t.equals(s.max, 0)
   t.equals(s.sum, 0)
+  t.end()
+})
+
+test('sma of different size', (t) => {
+  t.goodEnuf = function (obs, expect, msg) {
+    this.equals(obs.toPrecision(7), expect.toPrecision(7), msg)
+  }
+
+  var s = Stats(10)
+  for (var i = 0; i < 100; i++) {
+    s.update(i)
+  }
+  t.equals(s.n, 100, '100 entries')
+  t.equals(s.min, 0, 'min')
+  t.equals(s.max, 99, 'max')
+  t.goodEnuf(s.mean, 49.5, 'mean')
+  t.equals(s.sum, 4950, 'sum')
+  t.goodEnuf(s.variance, 833.2500, 'variance')
+  t.equals(s.standard_deviation, 28.86607004772212, 'standard_deviation')
+  t.equals(s.sma10, 94.5, 'sma10')
   t.end()
 })
