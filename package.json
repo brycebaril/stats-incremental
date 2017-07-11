@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test/"
+    "test": "node test/ && standard"
   },
   "keywords": [
     "stats",
@@ -35,6 +35,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "standard": "~10.0.2",
     "stats-lite": "^2.1.0",
     "tape": "~4.7.0"
   },

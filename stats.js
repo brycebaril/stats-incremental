@@ -1,30 +1,30 @@
-"use strict";
+'use strict'
 
 module.exports = Stats
 
-function Stats() {
+function Stats () {
   if (!(this instanceof Stats)) return new Stats()
   this.n = 0
   this.min = Number.MAX_VALUE
   this.max = -Number.MAX_VALUE
   this.sum = 0
   this.mean = 0
-  Object.defineProperty(this, "q", {
+  Object.defineProperty(this, 'q', {
     enumerable: false,
     writable: true,
     value: 0
   })
-  Object.defineProperty(this, "variance", {
+  Object.defineProperty(this, 'variance', {
     enumerable: true,
     get: function () { return this.q / this.n }
   })
-  Object.defineProperty(this, "standard_deviation", {
+  Object.defineProperty(this, 'standard_deviation', {
     enumerable: true,
-    get: function () { return Math.sqrt(this.q / this.n)}
+    get: function () { return Math.sqrt(this.q / this.n) }
   })
 }
 
-Stats.prototype.update = function update(value) {
+Stats.prototype.update = function update (value) {
   var num = parseFloat(value)
   if (isNaN(num)) {
     // Sorry, no NaNs
@@ -39,7 +39,7 @@ Stats.prototype.update = function update(value) {
   this.q = this.q + (num - prevMean) * (num - this.mean)
 }
 
-Stats.prototype.getAll = function getAll() {
+Stats.prototype.getAll = function getAll () {
   if (this.n === 0) {
     return null
   }

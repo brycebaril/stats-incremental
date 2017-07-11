@@ -1,8 +1,8 @@
-var spigot = require("stream-spigot")
-var through2 = require("through2")
-var terminus = require("terminus")
+var spigot = require('stream-spigot')
+var through2 = require('through2')
+var terminus = require('terminus')
 
-var Stats = require("../stats")
+var Stats = require('../stats')
 var s = Stats()
 
 var statStream = through2.obj(function (chunk, encoding, callback) {
