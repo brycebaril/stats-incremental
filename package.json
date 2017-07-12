@@ -33,10 +33,11 @@
     "newcap": false,
     "eqeqeq": false
   },
-  "dependencies": {},
+  "dependencies": {
+    "stats-lite": "^2.1.0"
+  },
   "devDependencies": {
     "standard": "~10.0.2",
-    "stats-lite": "^2.1.0",
     "tape": "~4.7.0"
   },
   "repository": {
